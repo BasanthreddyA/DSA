@@ -1,0 +1,25 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        // 1. Create an array of numbers
+        int[] numbers = {1, 2, 2, 3, 4, 4, 4, 5, 5, 5};
+
+        // 2. Create a HashMap to store number frequencies
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+
+        // 3. Count the frequency of each number
+        for (int num : numbers) {
+            // If the number exists in the map, get its current count; otherwise, use a default of 0
+            int count = frequencyMap.getOrDefault(num, 0);
+
+            // Increment the count and update the map
+            frequencyMap.put(num, count + 1);
+        }
+
+        // 4. Display the frequency of each number
+        for (Map.Entry<Integer, Integer> entry : frequencyMap.entrySet()) {
+            System.out.println("Number: " + entry.getKey() + " Frequency: " + entry.getValue());
+        }
+    }
+}
