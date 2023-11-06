@@ -1,0 +1,75 @@
+
+Link : https://docs.google.com/document/d/1vuXyCwPLiYoFpjZZBCxojRI2EYdYcnIDdCQ61x9L2vs/edit
+
+BF Code : 
+
+import java.util.*;
+
+public class UpdateArray {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt(); // Read n
+        int[] b = new int[n + 1];
+        Arrays.fill(b,0);
+        
+        int Q = scanner.nextInt(); // Read the number of queries
+
+        for (int i = 1; i <= Q; i++) {
+            int L = scanner.nextInt();
+            int R = scanner.nextInt();
+
+            for (int k = L; k <= R; k++) {
+                b[k] = b[k] + 1;
+            }
+        }
+
+        // Print the updated array
+        for (int i = 1; i <= n; i++) {
+            System.out.print(b[i] + " ");
+        }
+    }
+}
+
+
+Optimised By using the Hashing
+
+import java.util.*;
+import java.util.Scanner;
+
+public class UpdateArray {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt(); // Read n
+        int[] b = new int[n + 1];
+        
+        int Q = scanner.nextInt(); // Read the number of queries
+
+        for (int i = 1; i <= Q; i++) {
+            int L = scanner.nextInt();
+            int R = scanner.nextInt();
+
+            b[L] = b[L] + 1;
+            if (R + 1 <= n) {
+                b[R + 1] = b[R + 1] - 1;
+            }
+        }
+
+        for (int i = 1; i <= n; i++) {
+            if (i > 1) {
+                b[i] = b[i] + b[i - 1];
+            }
+        }
+
+        // Print the updated array
+        for (int i = 1; i <= n; i++) {
+            System.out.print(b[i] + " ");
+        }
+    }
+}
+
+
+TC: O(N+Q)
+SC:O(
+
