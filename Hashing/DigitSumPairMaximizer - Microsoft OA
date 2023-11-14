@@ -1,0 +1,93 @@
+Q:https://www.desiqna.in/13267/microsoft-coding-oa-sde-1-may-3-2023
+https://docs.google.com/document/d/1HJdcMlBm8CfIxs8d-lZYNy9oFsVO-aepVzDkrEgeyas/edit
+
+///Brute Force Apporach
+import java.util.Scanner;
+
+public class Main {
+    public static long sol(long v) {
+        long sum = 0;
+        while (v != 0) {
+            sum = sum + v % 10;
+            v = v / 10;
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+        long[] b = new long[n + 1];
+        int[] digitsum = new int[n + 1];
+
+        for (int i = 1; i <= n; i++) {
+            b[i] = scanner.nextLong();
+            digitsum[i] = (int) sol(b[i]);
+        }
+
+        long answer = -1;
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = i - 1; j >= 1; j--) {
+                if (digitsum[i] == digitsum[j]) {
+                    long p = b[i] + b[j];
+                    answer = Math.max(answer, p);
+                }
+            }
+        }
+
+        System.out.println(answer);
+    }
+}
+
+
+
+
+///Optimal
+
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Main {
+    public static long sol(long v) {
+        long sum = 0;
+        while (v != 0) {
+            sum = sum + v % 10;
+            v = v / 10;
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+        long[] b = new long[n + 1];
+
+        int i = 1;
+        while (i <= n) {
+            b[i] = scanner.nextLong();
+            i++;
+        }
+
+        HashMap<Long, Long> kk = new HashMap<>();
+        i = 1;
+        long answer = -1;
+
+        while (i <= n) {
+            if (kk.containsKey(sol(b[i]))) {
+                long pp = b[i] + kk.get(sol(b[i]));
+                answer = Math.max(answer, pp);
+                kk.put(sol(b[i]), Math.max(kk.get(sol(b[i])), b[i]));
+            } else {
+                kk.put(sol(b[i]), b[i]);
+            }
+            i++;
+        }
+
+        System.out.println(answer);
+    }
+}
+
