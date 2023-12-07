@@ -21,3 +21,27 @@ class Solution {
         return false;
     }
 }
+
+//With out using extra space like array
+class Solution {
+    public boolean checkSubarraySum(int[] nums, int k) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        map.put(0,-1);  /// for 0 at minder -1
+        int l=nums.length;
+        int sum=0;
+        for(int i=0;i<l;i++){
+            sum+=nums[i];
+            // prefixSum[i]=sum%k;
+
+            if(map.containsKey(sum%k)){
+                if((i-map.get(sum%k))>=2){ //getting the value is greater than the or equal to 2 return true
+                    return true;
+                }
+                
+            }else{
+                map.putIfAbsent(sum%k,i);
+            }
+        }
+        return false;
+    }
+}
